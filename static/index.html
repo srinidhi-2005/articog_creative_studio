@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Articog Creative Core</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body class="min-h-screen antialiased selection:bg-white selection:text-black">
+  <!-- Subtle Top Studio Ambient Light -->
+  <div class="studio-spotlight pointer-events-none"></div>
+
+  <!-- Highlighted Sticky Glassmorphic Header -->
+  <header class="highlighted-navbar sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <div>
+        <div class="flex items-center gap-3">
+          <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-400"></span>
+          </span>
+          <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-white">Articog Creative Core</h1>
+          <span class="mono text-xs uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-white/[0.08] border border-white/[0.18] text-zinc-200">
+            AI Studio v1.0
+          </span>
+        </div>
+        <p class="text-sm sm:text-base text-zinc-300 mt-1">
+          Eliminating brief ambiguity, creative drift & multi-channel delivery bottlenecks.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <span id="keyStatusIndicator" class="mono text-xs text-zinc-400 hidden sm:inline">Default Engine</span>
+        <button onclick="toggleKeyBar()" class="text-xs sm:text-sm px-4 py-2 rounded-full bg-white/[0.07] border border-white/[0.18] text-white hover:bg-white/[0.14] hover:border-white/35 transition flex items-center gap-2 font-medium">
+          <span>⚙</span>
+          <span>API Key</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Collapsible API Key Bar -->
+    <div id="keyBar" class="hidden border-t border-white/[0.12] bg-zinc-950/95">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm">
+        <span class="text-zinc-300">Optional Gemini API Key (uses server secret or built-in deterministic engine if left blank):</span>
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <input id="apiKeyInput" oninput="updateKeyIndicator()" type="password" placeholder="AIzaSy..." class="studio-input mono px-3.5 py-2 text-sm w-full sm:w-80" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 relative z-10">
+    <!-- Highlighted Segmented Studio Navigation -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+      <div class="highlighted-tab-bar inline-flex flex-wrap gap-1.5 p-1.5 rounded-2xl">
+        <button id="tabBtn1" onclick="switchTab(1)" class="tab-active px-5 py-2.5 rounded-xl text-sm sm:text-base transition flex items-center gap-2">
+          <span class="mono text-xs opacity-70">01</span> Brief & Channel Delivery
+        </button>
+        <button id="tabBtn2" onclick="switchTab(2)" class="tab-inactive px-5 py-2.5 rounded-xl text-sm sm:text-base transition flex items-center gap-2">
+          <span class="mono text-xs opacity-70">02</span> Review & Anti-Drift Gate
+        </button>
+        <button id="tabBtn3" onclick="switchTab(3)" class="tab-inactive px-5 py-2.5 rounded-xl text-sm sm:text-base transition flex items-center gap-2">
+          <span class="mono text-xs opacity-70">03</span> 4-System Value Map
+        </button>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- TAB 1: BRIEF & CHANNEL DELIVERY SYSTEM                              -->
+    <!-- =================================================================== -->
+    <section id="tab1" class="space-y-6 animate-fade">
+      <div class="studio-card p-6 sm:p-8">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
+          <div>
+            <div class="mono text-xs uppercase tracking-widest text-emerald-400 mb-1.5">System 01 · Pre-Production & Sizing</div>
+            <h2 class="text-xl sm:text-2xl font-semibold text-white">Zero-Ambiguity Brief & Multi-Channel Delivery Engine</h2>
+            <p class="text-sm sm:text-base text-zinc-300 mt-1">
+              Transforms rough client ideas into locked visual rules, rejection guardrails, timed storyboards and channel-ready prompts.
+            </p>
+          </div>
+
+          <!-- 1-Click Preset Pills -->
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-xs text-zinc-400 mr-1">Quick Presets:</span>
+            <button onclick="loadPreset('coffee')" class="preset-pill">☕ Cold Brew</button>
+            <button onclick="loadPreset('ring')" class="preset-pill">💍 Smart Ring</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-6">
+          <div>
+            <label class="block text-sm font-medium text-zinc-200 mb-2">Brand / Product Name</label>
+            <input id="brandName" type="text" placeholder="e.g., Deccan Roast Cold Brew" class="studio-input w-full px-4 py-3 text-base" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-zinc-200 mb-2">Primary Service Track</label>
+            <select id="serviceTrack" class="studio-input w-full px-4 py-3 text-base">
+              <option value="AI Video Production">AI Video Production</option>
+              <option value="Ad Creative">Ad Creative</option>
+              <option value="Social Creative">Social Creative</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-zinc-200 mb-2">Target Audience</label>
+            <input id="audience" type="text" placeholder="e.g., Urban tech professionals in Hyderabad, ages 24–38" class="studio-input w-full px-4 py-3 text-base" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-zinc-200 mb-2">Core Offer / Product Spec</label>
+            <input id="offer" type="text" placeholder="e.g., 18-hour single-origin cold brew in matte-black glass" class="studio-input w-full px-4 py-3 text-base" />
+          </div>
+          <div class="md:col-span-2">
+            <label class="block text-sm font-medium text-zinc-200 mb-2">Rough Client Idea (2–3 sentences)</label>
+            <textarea id="roughIdea" rows="3" placeholder="Describe the raw campaign concept, mood, or visual transition..." class="studio-input w-full px-4 py-3 text-base"></textarea>
+          </div>
+        </div>
+
+        <div class="mt-6 flex flex-wrap items-center gap-4">
+          <button id="generateBriefBtn" onclick="generateBrief()" class="btn-primary px-7 py-3 rounded-full text-base font-semibold flex items-center gap-2">
+            <span id="briefBtnSpinner" class="hidden spinner"></span>
+            <span id="briefBtnText">Generate Production Pack →</span>
+          </button>
+          <span id="briefStatus" class="text-sm text-zinc-300"></span>
+        </div>
+      </div>
+
+      <!-- Output Area -->
+      <div id="briefOutput" class="hidden space-y-6 animate-fade">
+        <div class="flex flex-wrap items-center justify-between gap-3 px-1">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+            <span id="briefSourceBadge" class="mono text-xs sm:text-sm px-3.5 py-1.5 rounded-full bg-white/[0.06] border border-white/[0.14] text-zinc-100"></span>
+          </div>
+          <button onclick="downloadBriefJson()" class="text-xs sm:text-sm px-4 py-2 rounded-full bg-white/[0.06] border border-white/[0.14] hover:border-white/35 text-zinc-100 transition">
+            ↓ Export Production JSON
+          </button>
+        </div>
+
+        <!-- A. Locked Brief & Rejection Criteria -->
+        <div class="studio-card p-6 sm:p-7 space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="mono text-xs sm:text-sm font-semibold uppercase tracking-widest text-zinc-300">A · Locked Brief Specification & Guardrails</h3>
+          </div>
+          <p id="outObjective" class="text-base sm:text-lg font-medium text-white leading-relaxed"></p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+            <div class="sub-card p-4 sm:p-5">
+              <div class="mono text-xs uppercase tracking-wider text-zinc-400 mb-2">Locked Visual Language</div>
+              <p id="outVisualLang" class="text-sm sm:text-base text-zinc-100 leading-relaxed"></p>
+            </div>
+            <div class="sub-card p-4 sm:p-5">
+              <div class="mono text-xs uppercase tracking-wider text-zinc-400 mb-2">Camera & Motion Rules</div>
+              <p id="outCameraRules" class="text-sm sm:text-base text-zinc-100 leading-relaxed"></p>
+            </div>
+          </div>
+
+          <div class="p-4 sm:p-5 rounded-xl bg-rose-950/25 border border-rose-500/30">
+            <div class="mono text-xs uppercase tracking-wider font-semibold text-rose-300 mb-2.5">
+              ✕ Rejection Criteria (Pre-Generation Guardrails)
+            </div>
+            <ul id="outRejectionList" class="space-y-2 text-sm sm:text-base text-rose-100"></ul>
+          </div>
+        </div>
+
+        <!-- B. 4-Shot Storyboard & Voiceover -->
+        <div class="studio-card p-6 sm:p-7 space-y-5">
+          <h3 class="mono text-xs sm:text-sm font-semibold uppercase tracking-widest text-zinc-300">B · 4-Shot Storyboard & 15s Voiceover Script</h3>
+          <div id="outStoryboardGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+
+          <div class="sub-card p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="space-y-1.5">
+              <div class="mono text-xs uppercase tracking-wider text-zinc-400">🎙 15-Second Voiceover Narration</div>
+              <p id="outVoiceover" class="text-base text-zinc-100 italic leading-relaxed"></p>
+            </div>
+            <button onclick="copyText('outVoiceover')" class="copy-btn shrink-0">Copy Script</button>
+          </div>
+        </div>
+
+        <!-- C. Channel-Specific Delivery Prompts -->
+        <div class="studio-card p-6 sm:p-7 space-y-4">
+          <h3 class="mono text-xs sm:text-sm font-semibold uppercase tracking-widest text-zinc-300">C · Channel-Specific Delivery Prompts</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="sub-card p-4 sm:p-5 flex flex-col justify-between gap-4">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="mono text-xs sm:text-sm font-semibold text-emerald-400">Social Creative · 9:16</span>
+                  <button onclick="copyText('prompt916')" class="copy-btn">Copy</button>
+                </div>
+                <p id="prompt916" class="text-sm text-zinc-200 leading-relaxed"></p>
+              </div>
+            </div>
+
+            <div class="sub-card p-4 sm:p-5 flex flex-col justify-between gap-4">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="mono text-xs sm:text-sm font-semibold text-sky-400">Ad Creative · 1:1</span>
+                  <button onclick="copyText('prompt11')" class="copy-btn">Copy</button>
+                </div>
+                <p id="prompt11" class="text-sm text-zinc-200 leading-relaxed"></p>
+              </div>
+            </div>
+
+            <div class="sub-card p-4 sm:p-5 flex flex-col justify-between gap-4">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="mono text-xs sm:text-sm font-semibold text-amber-400">AI Video Film · 16:9</span>
+                  <button onclick="copyText('prompt169')" class="copy-btn">Copy</button>
+                </div>
+                <p id="prompt169" class="text-sm text-zinc-200 leading-relaxed"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 2: AUTOMATED REVIEW & ANTI-DRIFT GATE                           -->
+    <!-- =================================================================== -->
+    <section id="tab2" class="hidden space-y-6 animate-fade">
+      <div class="studio-card p-6 sm:p-8">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
+          <div>
+            <div class="mono text-xs uppercase tracking-widest text-sky-400 mb-1.5">System 02 · Automated Quality Control</div>
+            <h2 class="text-xl sm:text-2xl font-semibold text-white">Automated Review & Anti-Drift Quality Gate</h2>
+          </div>
+          <button onclick="runDemoDriftTest()" class="btn-primary px-5 py-3 rounded-full text-sm font-semibold shrink-0 flex items-center gap-2">
+            <span>⚡ Run 1-Click Demo Drift Test</span>
+          </button>
+        </div>
+
+        <!-- Custom Dropzones with Live Previews -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-6">
+          <label class="dropzone-box p-5 sm:p-6 cursor-pointer block">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm sm:text-base font-semibold text-white">1. Locked Brand / Product Reference</span>
+              <span class="mono text-xs text-zinc-400">1 IMAGE</span>
+            </div>
+            <p class="text-sm text-zinc-300 mb-4">Click to choose the baseline product/brand image.</p>
+            <input id="refImageInput" onchange="previewSelectedFiles('ref')" type="file" accept="image/*" class="hidden" />
+            <div id="refSelectPreview" class="flex items-center gap-3 text-sm text-zinc-400">
+              <span class="px-4 py-2 rounded-lg bg-white/[0.07] border border-white/[0.15] text-zinc-100 font-medium">Select Reference File...</span>
+            </div>
+          </label>
+
+          <label class="dropzone-box p-5 sm:p-6 cursor-pointer block">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm sm:text-base font-semibold text-white">2. AI-Generated Candidate Frames</span>
+              <span class="mono text-xs text-zinc-400">UP TO 4 IMAGES</span>
+            </div>
+            <p class="text-sm text-zinc-300 mb-4">Click to select generated frames to inspect for drift.</p>
+            <input id="candImagesInput" onchange="previewSelectedFiles('cand')" type="file" accept="image/*" multiple class="hidden" />
+            <div id="candSelectPreview" class="flex flex-wrap items-center gap-3 text-sm text-zinc-400">
+              <span class="px-4 py-2 rounded-lg bg-white/[0.07] border border-white/[0.15] text-zinc-100 font-medium">Select Candidate Frames...</span>
+            </div>
+          </label>
+        </div>
+
+        <div class="mt-6 flex flex-wrap items-center gap-4">
+          <button onclick="runCustomReviewGate()" class="px-6 py-3 rounded-full bg-white/[0.08] border border-white/[0.2] hover:bg-white/[0.15] text-sm sm:text-base font-medium text-white transition">
+            Evaluate Uploaded Frames
+          </button>
+          <span id="qcStatus" class="text-sm text-zinc-300"></span>
+        </div>
+      </div>
+
+      <!-- QC Results -->
+      <div id="qcOutput" class="hidden space-y-5 animate-fade">
+        <div class="studio-card p-6 sm:p-7">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 pb-6 border-b border-white/[0.08]">
+            <img id="refPreviewImg" src="" alt="Reference" class="w-24 h-24 rounded-xl object-cover border border-white/25 shadow-lg" />
+            <div class="space-y-1">
+              <span class="mono text-xs uppercase tracking-widest text-emerald-400">Baseline Anchor Locked</span>
+              <h3 class="text-lg font-semibold text-white">Brand / Product Reference Image</h3>
+              <p class="text-sm text-zinc-300 max-w-2xl">
+                Weighted scoring: <span class="text-white font-medium">45% Structural Silhouette Fidelity</span> (PyTorch cosine similarity) + <span class="text-white font-medium">35% Color Language</span> (OpenCV HSV correlation) + <span class="text-white font-medium">20% Render Sharpness</span> (Laplacian variance).
+              </p>
+            </div>
+          </div>
+
+          <div id="qcResultsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-6"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 3: ARTICOG 4-SYSTEM VALUE MAP                                   -->
+    <!-- =================================================================== -->
+    <section id="tab3" class="hidden space-y-6 animate-fade">
+      <div class="studio-card p-6 sm:p-8">
+        <div class="mono text-xs uppercase tracking-widest text-amber-400 mb-1.5">End-to-End Architecture</div>
+        <h2 class="text-xl sm:text-2xl font-semibold text-white">Mapping AI Engineering to Articog’s 4 Production Systems</h2>
+        <p class="text-sm sm:text-base text-zinc-300 mt-1 mb-6">
+          How Python, PyTorch, NLP, Computer Vision and containerized FastAPI pipelines turn creative direction into repeatable production velocity.
+        </p>
+
+        <!-- Visual Pipeline Flow Bar -->
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 mb-7 p-4 rounded-2xl bg-white/[0.03] border border-white/[0.09]">
+          <div class="p-3.5 rounded-xl bg-black/65 border border-white/[0.08]">
+            <div class="mono text-xs text-emerald-400">STEP 01 · INPUT</div>
+            <div class="text-sm font-semibold text-white mt-1">Brief Structuring</div>
+            <div class="text-xs text-zinc-300 mt-0.5">Locks rules & rejection criteria</div>
+          </div>
+          <div class="p-3.5 rounded-xl bg-black/65 border border-white/[0.08]">
+            <div class="mono text-xs text-sky-400">STEP 02 · GENERATE</div>
+            <div class="text-sm font-semibold text-white mt-1">Multi-Ratio Prompts</div>
+            <div class="text-xs text-zinc-300 mt-0.5">9:16, 1:1, 16:9 + VO scripts</div>
+          </div>
+          <div class="p-3.5 rounded-xl bg-black/65 border border-white/[0.08]">
+            <div class="mono text-xs text-rose-400">STEP 03 · QUALITY GATE</div>
+            <div class="text-sm font-semibold text-white mt-1">Anti-Drift CV Check</div>
+            <div class="text-xs text-zinc-300 mt-0.5">Filters SKU & color drift</div>
+          </div>
+          <div class="p-3.5 rounded-xl bg-black/65 border border-white/[0.08]">
+            <div class="mono text-xs text-amber-400">STEP 04 · DELIVER</div>
+            <div class="text-sm font-semibold text-white mt-1">Production Finish</div>
+            <div class="text-xs text-zinc-300 mt-0.5">Human edit & channel export</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="sub-card p-5 sm:p-6 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="mono text-xs sm:text-sm font-semibold text-emerald-400">SYSTEM 01</span>
+              <span class="mono text-xs text-zinc-400">NLP · Structured LLM Pipelines</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white">The Brief System</h3>
+            <p class="text-sm text-zinc-300 leading-relaxed">
+              <strong class="text-white">Bottleneck:</strong> Unclear client briefs create ambiguity and endless revision loops.<br/>
+              <strong class="text-white">Engineering Fix:</strong> Automated brief-to-spec parser locking audience, visual language, camera rules and explicit rejection criteria before generation starts.
+            </p>
+          </div>
+
+          <div class="sub-card p-5 sm:p-6 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="mono text-xs sm:text-sm font-semibold text-sky-400">SYSTEM 02</span>
+              <span class="mono text-xs text-zinc-400">PyTorch · Computer Vision</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white">The Review System</h3>
+            <p class="text-sm text-zinc-300 leading-relaxed">
+              <strong class="text-white">Bottleneck:</strong> Manual frame-by-frame inspection slows down creative decisions and misses subtle SKU drift.<br/>
+              <strong class="text-white">Engineering Fix:</strong> Embedding-based brand reference similarity + HSV color & sharpness quality gates filtering out drifted frames automatically.
+            </p>
+          </div>
+
+          <div class="sub-card p-5 sm:p-6 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="mono text-xs sm:text-sm font-semibold text-amber-400">SYSTEM 03</span>
+              <span class="mono text-xs text-zinc-400">Data Pipelines · Feedback Loop</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white">The Performance System</h3>
+            <p class="text-sm text-zinc-300 leading-relaxed">
+              <strong class="text-white">Bottleneck:</strong> Aesthetic choices alone don't capture what actually converts across campaigns.<br/>
+              <strong class="text-white">Engineering Fix:</strong> Tagging every approved shot/prompt with campaign CTR/ROAS metadata to rank high-converting visual patterns for future briefs.
+            </p>
+          </div>
+
+          <div class="sub-card p-5 sm:p-6 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="mono text-xs sm:text-sm font-semibold text-purple-400">SYSTEM 04</span>
+              <span class="mono text-xs text-zinc-400">FastAPI · Docker · CI/CD</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white">The Delivery System</h3>
+            <p class="text-sm text-zinc-300 leading-relaxed">
+              <strong class="text-white">Bottleneck:</strong> Manually adapting one campaign across 9:16 social, 1:1 paid ads and 16:9 film eats editor hours.<br/>
+              <strong class="text-white">Engineering Fix:</strong> Containerized REST APIs generating channel-specific prompt packs, safe-zone layouts and batch export manifests in one click.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Floating Copy Toast -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 hidden px-5 py-3 rounded-full bg-white text-black text-sm font-semibold shadow-2xl">
+    ✓ Copied to clipboard
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
+
