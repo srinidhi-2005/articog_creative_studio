@@ -67,6 +67,20 @@ async function generateBrief() {
   const spinner = document.getElementById("briefBtnSpinner");
   const btnText = document.getElementById("briefBtnText");
 
+  const brand = document.getElementById("brandName").value.trim();
+  const idea = document.getElementById("roughIdea").value.trim();
+
+  // Require at least a real brand name or rough idea (with letters/numbers, not pure symbols)
+  const hasValidBrand = /[a-zA-Z0-9]{2,}/.test(brand);
+  const hasValidIdea = /[a-zA-Z0-9]{3,}/.test(idea);
+
+  if (!hasValidBrand && !hasValidIdea) {
+    status.textContent = "⚠ Please enter a valid Brand Name or a brief campaign idea (or click a Quick Preset above).";
+    status.className = "text-sm text-amber-400";
+    return;
+  }
+  
+  status.className = "text-sm text-zinc-300";
   status.textContent = "Structuring brief & multi-channel prompts...";
   btn.disabled = true;
   spinner.classList.remove("hidden");

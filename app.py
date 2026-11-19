@@ -2,6 +2,7 @@ import base64
 import io
 import json
 import os
+import re
 from typing import List, Optional
 
 import cv2
@@ -213,8 +214,16 @@ def fallback_brief_generator(req: BriefRequest) -> dict:
         },
     }
 
+
 @app.post("/api/generate-brief")
 async def generate_brief(req: BriefRequest):
+    combined_text = f"{req.brand_name} {req.audience} {req.offer} {req.rough_idea}".strip()
+    if len(re.findall(r"[a-zA-Z0-9]{2,}", combined_text)) < 2:
+        raise HTTPException(
+            status_code=422,
+            detail="Please provide a recognizable Brand Name and a short campaign description.",
+        )
+    
     try:
         api_key = (req.api_key or "").strip() or os.environ.get("GEMINI_API_KEY", "").strip()
 
